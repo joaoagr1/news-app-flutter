@@ -38,8 +38,9 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       );
     } else {
+      final responseData = json.decode(response.body);
       setState(() {
-        _errorMessage = 'Falha no login. Verifique suas credenciais.';
+        _errorMessage = responseData['error'] ?? 'Falha no login. Verifique suas credenciais.';
       });
     }
   }

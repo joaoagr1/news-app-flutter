@@ -32,8 +32,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
     if (response.statusCode == 200) {
       Navigator.pop(context); // Volta para a tela de login após cadastro
     } else {
+      final responseData = json.decode(response.body);
       setState(() {
-        _errorMessage = 'Falha no cadastro. Verifique as informações.';
+        _errorMessage = responseData['error'] ?? 'Falha no cadastro. Verifique as informações.';
       });
     }
   }
