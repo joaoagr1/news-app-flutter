@@ -1,6 +1,7 @@
 // lib/login_screen.dart
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:newsapp/result_screen.dart';
 import 'package:newsapp/succes_screen.dart';
 import 'dart:convert';
 
@@ -34,7 +35,7 @@ class _LoginScreenState extends State<LoginScreen> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => SuccessScreen(token: token),
+          builder: (context) => ResultScreen(token: token),
         ),
       );
     } else {
