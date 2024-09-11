@@ -5,17 +5,22 @@ import 'dart:convert';
 import 'models/create_news_screen.dart';
 import 'models/news.dart';
 import 'models/user.dart';
+import 'news_card.dart';
 import 'news_detail.dart';
 
 class ResultScreen extends StatefulWidget {
   final String token;
   final User user;
 
+
+
   ResultScreen({required this.token, required this.user});
 
   @override
   _ResultScreenState createState() => _ResultScreenState();
 }
+
+
 
 class _ResultScreenState extends State<ResultScreen> {
   List<News> _newsList = [];
@@ -50,43 +55,11 @@ class _ResultScreenState extends State<ResultScreen> {
       appBar: AppBar(
         title: Text('Resultado do Login'),
         actions: [
-          PopupMenuButton<String>(
-            onSelected: (value) {
-              if (value == 'user_data') {
-                // Show user data
-                showDialog(
-                  context: context,
-                  builder: (context) => AlertDialog(
-                    title: Text('User Data'),
-                    content: Text('Login: ${widget.user.login}\nEmail: ${widget.user.email}\nRole: ${widget.user.role}'),
-                    actions: [
-                      TextButton(
-                        onPressed: () => Navigator.pop(context),
-                        child: Text('OK'),
-                      ),
-                    ],
-                  ),
-                );
-              } else if (value == 'add_news' && widget.user.role == 'ADMIN') {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => CreateNewsScreen(token: widget.token),
-                  ),
-                );
-              }
+          IconButton(
+            icon: Icon(Icons.notifications),
+            onPressed: () {
+              // Handle notifications
             },
-            itemBuilder: (context) => [
-              PopupMenuItem(
-                value: 'user_data',
-                child: Text('User Data'),
-              ),
-              if (widget.user.role == 'ADMIN')
-                PopupMenuItem(
-                  value: 'add_news',
-                  child: Text('Add News'),
-                ),
-            ],
           ),
         ],
       ),
@@ -96,20 +69,64 @@ class _ResultScreenState extends State<ResultScreen> {
               itemCount: _newsList.length,
               itemBuilder: (context, index) {
                 final news = _newsList[index];
-                return ListTile(
-                  title: Text(news.titulo),
-                  subtitle: Text(news.categoria.nome),
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => NewsDetailScreen(news: news),
-                      ),
-                    );
-                  },
-                );
+                return NewsCard(news: news);
               },
             ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'User Data',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.list),
+            label: 'All News',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.category),
+            label: 'Categories',
+          ),
+        ],
+        onTap: (index) {
+          switch (index) {
+            case 0:
+              // Navigate to User Data
+              showDialog(
+                context: context,
+                builder: (context) => AlertDialog(
+                  title: Text('User Data'),
+                  content: Text('Login: ${widget.user.login}\nEmail: ${widget.user.email}\nRole: ${widget.user.role}'),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.pop(context),
+                      child: Text('OK'),
+                    ),
+                  ],
+                ),
+              );
+              break;
+            case 1:
+              // Navigate to All News
+              break;
+            case 2:
+              // Navigate to Categories
+              break;
+          }
+        },
+      ),
+      floatingActionButton: widget.user.role == 'ADMIN'
+          ? FloatingActionButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => CreateNewsScreen(token: widget.token),
+                  ),
+                );
+              },
+              child: Icon(Icons.add),
+            )
+          : null,
     );
   }
 }
