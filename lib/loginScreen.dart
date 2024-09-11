@@ -2,10 +2,9 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:newsapp/result_screen.dart';
-import 'package:newsapp/succes_screen.dart';
 import 'dart:convert';
-
-import 'register_screen.dart'; // Import for the register screen
+import 'models/user.dart';
+import 'register_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -18,7 +17,7 @@ class _LoginScreenState extends State<LoginScreen> {
   String _errorMessage = '';
 
   Future<void> login() async {
-    final url = Uri.parse('http://192.168.0.24:8585/auth/login'); // Adjust IP for emulator or real device
+    final url = Uri.parse('http://192.168.0.24:8585/auth/login');
     final response = await http.post(
       url,
       headers: {'Content-Type': 'application/json'},
@@ -31,11 +30,12 @@ class _LoginScreenState extends State<LoginScreen> {
     if (response.statusCode == 200) {
       final responseData = json.decode(response.body);
       final token = responseData['token'];
+      final user = User.fromJson(responseData['users']);
 
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => ResultScreen(token: token),
+          builder: (context) => ResultScreen(token: token, user: user),
         ),
       );
     } else {

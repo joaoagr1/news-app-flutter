@@ -2,13 +2,16 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'models/create_news_screen.dart';
 import 'models/news.dart';
+import 'models/user.dart';
 import 'news_detail.dart';
 
 class ResultScreen extends StatefulWidget {
   final String token;
+  final User user;
 
-  ResultScreen({required this.token});
+  ResultScreen({required this.token, required this.user});
 
   @override
   _ResultScreenState createState() => _ResultScreenState();
@@ -29,15 +32,12 @@ class _ResultScreenState extends State<ResultScreen> {
     final response = await http.get(url);
 
     if (response.statusCode == 200) {
-      print("200 OOOOOKKKKKK");
       final List<dynamic> newsJson = json.decode(response.body);
       setState(() {
         _newsList = newsJson.map((json) => News.fromJson(json)).toList();
         _isLoading = false;
       });
     } else {
-      // Handle error
-      print("EROOOOOOOOOO");
       setState(() {
         _isLoading = false;
       });
@@ -47,7 +47,49 @@ class _ResultScreenState extends State<ResultScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Resultado do Login')),
+      appBar: AppBar(
+        title: Text('Resultado do Login'),
+        actions: [
+          PopupMenuButton<String>(
+            onSelected: (value) {
+              if (value == 'user_data') {
+                // Show user data
+                showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    title: Text('User Data'),
+                    content: Text('Login: ${widget.user.login}\nEmail: ${widget.user.email}\nRole: ${widget.user.role}'),
+                    actions: [
+                      TextButton(
+                        onPressed: () => Navigator.pop(context),
+                        child: Text('OK'),
+                      ),
+                    ],
+                  ),
+                );
+              } else if (value == 'add_news' && widget.user.role == 'ADMIN') {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => CreateNewsScreen(token: widget.token),
+                  ),
+                );
+              }
+            },
+            itemBuilder: (context) => [
+              PopupMenuItem(
+                value: 'user_data',
+                child: Text('User Data'),
+              ),
+              if (widget.user.role == 'ADMIN')
+                PopupMenuItem(
+                  value: 'add_news',
+                  child: Text('Add News'),
+                ),
+            ],
+          ),
+        ],
+      ),
       body: _isLoading
           ? Center(child: CircularProgressIndicator())
           : ListView.builder(
