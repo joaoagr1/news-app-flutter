@@ -6,6 +6,7 @@ import 'dart:convert';
 import 'models/user.dart';
 import 'register_screen.dart';
 import 'result_screen.dart';
+import 'forgot_password_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -74,11 +75,6 @@ class _LoginScreenState extends State<LoginScreen> {
             padding: EdgeInsets.only(top: 60, left: 40, right: 40),
             child: ListView(
               children: <Widget>[
-                SizedBox(
-                  width: 230,
-                  height: 230,
-                  child: Image.asset("lib/assets/logo.png"),
-                ),
                 SizedBox(height: 20),
                 CupertinoTextField(
                   controller: _loginController,
@@ -100,12 +96,12 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: CupertinoButton(
                     child: Text("Recuperar Senha"),
                     onPressed: () {
-                      // Navigator.push(
-                      //   context,
-                      //   CupertinoPageRoute(
-                      //     builder: (context) => ResetPasswordPage(),
-                      //   ),
-                      // );
+                      Navigator.push(
+                        context,
+                        CupertinoPageRoute(
+                          builder: (context) => ForgotPasswordScreen(),
+                        ),
+                      );
                     },
                   ),
                 ),
