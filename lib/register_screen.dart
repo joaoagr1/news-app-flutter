@@ -1,10 +1,7 @@
 // lib/register_screen.dart
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-
-const Color primaryColor = Colors.lightGreen;
-const Color secondaryColor = Colors.white;
 
 class RegisterScreen extends StatefulWidget {
   @override
@@ -44,107 +41,59 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
+    return CupertinoPageScaffold(
+      navigationBar: CupertinoNavigationBar(
+        middle: Text('Register'),
+      ),
+      child: Stack(
         children: [
-          Container(color: secondaryColor),
-          CustomPaint(
-            painter: CurvePainter(),
-            child: Container(),
-          ),
+          Container(color: CupertinoColors.systemBackground),
           Container(
             padding: EdgeInsets.only(top: 60, left: 40, right: 40),
             child: ListView(
               children: <Widget>[
-                SizedBox(
-                  width: 230,
-                  height: 230,
-                  child: Image.asset("lib/assets/logo.png"),
-                ),
                 SizedBox(height: 20),
-                TextFormField(
+                CupertinoTextField(
                   controller: _loginController,
                   keyboardType: TextInputType.text,
-                  decoration: InputDecoration(
-                    labelText: "Login",
-                    labelStyle: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                    ),
-                  ),
-                  style: TextStyle(fontSize: 20),
+                  placeholder: "Login",
+                  padding: EdgeInsets.all(16),
                 ),
                 SizedBox(height: 10),
-                TextFormField(
+                CupertinoTextField(
                   controller: _passwordController,
                   keyboardType: TextInputType.text,
                   obscureText: true,
-                  decoration: InputDecoration(
-                    labelText: "Senha",
-                    labelStyle: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                    ),
-                  ),
-                  style: TextStyle(fontSize: 20),
+                  placeholder: "Senha",
+                  padding: EdgeInsets.all(16),
                 ),
                 SizedBox(height: 10),
-                TextFormField(
+                CupertinoTextField(
                   controller: _documentController,
                   keyboardType: TextInputType.text,
-                  decoration: InputDecoration(
-                    labelText: "Documento",
-                    labelStyle: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                    ),
-                  ),
-                  style: TextStyle(fontSize: 20),
+                  placeholder: "Documento",
+                  padding: EdgeInsets.all(16),
                 ),
                 SizedBox(height: 10),
-                TextFormField(
+                CupertinoTextField(
                   controller: _emailController,
                   keyboardType: TextInputType.emailAddress,
-                  decoration: InputDecoration(
-                    labelText: "Email",
-                    labelStyle: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                    ),
-                  ),
-                  style: TextStyle(fontSize: 20),
+                  placeholder: "Email",
+                  padding: EdgeInsets.all(16),
                 ),
                 SizedBox(height: 40),
-                Container(
-                  height: 60,
-                  alignment: Alignment.centerLeft,
-                  decoration: BoxDecoration(
-                    color: primaryColor,
-                    borderRadius: BorderRadius.all(Radius.circular(5)),
-                  ),
-                  child: SizedBox.expand(
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: primaryColor,
-                        shadowColor: Colors.transparent,
+                CupertinoButton.filled(
+                  child: Center(
+                    child: Text(
+                      "Cadastrar",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: CupertinoColors.white,
+                        fontSize: 20,
                       ),
-                      child: Center(
-                        child: Text(
-                          "Cadastrar",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: secondaryColor,
-                            fontSize: 20,
-                          ),
-                        ),
-                      ),
-                      onPressed: register,
                     ),
                   ),
+                  onPressed: register,
                 ),
                 SizedBox(height: 10),
                 if (_errorMessage.isNotEmpty) _buildErrorText(),
@@ -161,31 +110,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
       padding: const EdgeInsets.all(8.0),
       child: Text(
         _errorMessage,
-        style: const TextStyle(color: Colors.red),
+        style: const TextStyle(color: CupertinoColors.systemRed),
       ),
     );
-  }
-}
-
-class CurvePainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    var paint = Paint();
-    paint.color = primaryColor;
-    paint.style = PaintingStyle.fill;
-
-    var path = Path();
-    path.moveTo(0, size.height * 0.5);
-    path.quadraticBezierTo(size.width / 2, size.height * 0.2, size.width, size.height * 0.2);
-    path.lineTo(size.width, size.height);
-    path.lineTo(2, size.height);
-    path.close();
-
-    canvas.drawPath(path, paint);
-  }
-
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) {
-    return false;
   }
 }
