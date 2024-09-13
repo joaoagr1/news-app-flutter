@@ -1,6 +1,7 @@
 // lib/result_screen.dart
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:newsapp/user_dialog.dart';
 import 'dart:convert';
 import 'category_screen.dart';
 import 'models/create_news_screen.dart';
@@ -13,15 +14,11 @@ class ResultScreen extends StatefulWidget {
   final String token;
   final User user;
 
-
-
   ResultScreen({required this.token, required this.user});
 
   @override
   _ResultScreenState createState() => _ResultScreenState();
 }
-
-
 
 class _ResultScreenState extends State<ResultScreen> {
   List<News> _newsList = [];
@@ -54,7 +51,7 @@ class _ResultScreenState extends State<ResultScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Resultado do Login'),
+        title: Text('News'),
         actions: [
           IconButton(
             icon: Icon(Icons.notifications),
@@ -67,12 +64,12 @@ class _ResultScreenState extends State<ResultScreen> {
       body: _isLoading
           ? Center(child: CircularProgressIndicator())
           : ListView.builder(
-              itemCount: _newsList.length,
-              itemBuilder: (context, index) {
-                final news = _newsList[index];
-                return NewsCard(news: news);
-              },
-            ),
+        itemCount: _newsList.length,
+        itemBuilder: (context, index) {
+          final news = _newsList[index];
+          return NewsCard(news: news);
+        },
+      ),
       bottomNavigationBar: BottomNavigationBar(
         items: [
           BottomNavigationBarItem(
@@ -88,53 +85,40 @@ class _ResultScreenState extends State<ResultScreen> {
             label: 'Categories',
           ),
         ],
-
-          onTap: (index) {
-            switch (index) {
-              case 0:
-              // Navigate to User Data
-                showDialog(
-                  context: context,
-                  builder: (context) => AlertDialog(
-                    title: Text('User Data'),
-                    content: Text('Login: ${widget.user.login}\nEmail: ${widget.user.email}\nRole: ${widget.user.role}'),
-                    actions: [
-                      TextButton(
-                        onPressed: () => Navigator.pop(context),
-                        child: Text('OK'),
-                      ),
-                    ],
-                  ),
-                );
-                break;
-              case 1:
-              // Navigate to All News
-                break;
-              case 2:
-              // Navigate to Categories
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => CategoryScreen(),
-                  ),
-                );
-                break;
-            }
+        onTap: (index) {
+          switch (index) {
+            case 0:
+              showDialog(
+                context: context,
+                builder: (context) => UserDataDialog(user: widget.user),
+              );
+              break;
+            case 1:
+            // Navigate to All News
+              break;
+            case 2:
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => CategoryScreen(),
+                ),
+              );
+              break;
           }
-
+        },
       ),
       floatingActionButton: widget.user.role == 'ADMIN'
           ? FloatingActionButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => CreateNewsScreen(token: widget.token),
-                  ),
-                );
-              },
-              child: Icon(Icons.add),
-            )
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => CreateNewsScreen(token: widget.token),
+            ),
+          );
+        },
+        child: Icon(Icons.add),
+      )
           : null,
     );
   }

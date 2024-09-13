@@ -3,6 +3,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'error_dialog.dart';
+import 'models/succes_dialog.dart';
+
+
 class RegisterScreen extends StatefulWidget {
   @override
   _RegisterScreenState createState() => _RegisterScreenState();
@@ -13,30 +17,51 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _documentController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
-  String _errorMessage = '';
 
   Future<void> register() async {
     final url = Uri.parse('http://192.168.0.24:8585/auth/register');
-    final response = await http.post(
-      url,
-      headers: {'Content-Type': 'application/json'},
-      body: json.encode({
-        'login': _loginController.text,
-        'password': _passwordController.text,
-        'document': _documentController.text,
-        'email': _emailController.text,
-        'role': 'USER',
-      }),
-    );
+    try {
+      final response = await http.post(
+        url,
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode({
+          'login': _loginController.text,
+          'password': _passwordController.text,
+          'document': _documentController.text,
+          'email': _emailController.text,
+          'role': 'USER',
+        }),
+      );
 
-    if (response.statusCode == 200) {
-      Navigator.pop(context);
-    } else {
-      final responseData = json.decode(response.body);
-      setState(() {
-        _errorMessage = responseData['error'] ?? 'Falha no cadastro. Verifique as informações.';
-      });
+      if (response.statusCode == 200) {
+        _showSuccessDialog('Cadastro realizado com sucesso. Um email de confirmação foi enviado.');
+      } else {
+        final responseData = json.decode(response.body);
+        _showErrorDialog(responseData['error'] ?? 'Falha no cadastro. Verifique as informações.');
+      }
+    } catch (e) {
+      _showErrorDialog('Erro ao conectar ao servidor. Tente novamente mais tarde.');
     }
+  }
+
+  void _showErrorDialog(String message) {
+    showCupertinoDialog(
+      context: context,
+      builder: (context) => ErrorDialog(message: message),
+    );
+  }
+
+  void _showSuccessDialog(String message) {
+    showCupertinoDialog(
+      context: context,
+      builder: (context) => SuccessDialog(
+        message: message,
+        onOkPressed: () {
+          Navigator.of(context).pop(); // Close the dialog
+          Navigator.of(context).pop(); // Navigate back to login screen
+        },
+      ),
+    );
   }
 
   @override
@@ -95,22 +120,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                   onPressed: register,
                 ),
-                SizedBox(height: 10),
-                if (_errorMessage.isNotEmpty) _buildErrorText(),
               ],
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  Widget _buildErrorText() {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Text(
-        _errorMessage,
-        style: const TextStyle(color: CupertinoColors.systemRed),
       ),
     );
   }
