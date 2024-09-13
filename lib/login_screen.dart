@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'error_dialog.dart';
 import 'forgot_password_screen.dart';
 import 'models/user.dart';
 import 'register_screen.dart';
@@ -16,7 +17,6 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final _loginController = TextEditingController();
   final _passwordController = TextEditingController();
-  String _errorMessage = '';
 
   Future<void> login() async {
     final url = Uri.parse('http://192.168.0.24:8585/auth/login');
@@ -36,9 +36,7 @@ class _LoginScreenState extends State<LoginScreen> {
         _handleError(response);
       }
     } catch (e) {
-      setState(() {
-        _errorMessage = 'Erro ao conectar ao servidor. Tente novamente mais tarde.';
-      });
+      _showErrorDialog('Erro ao conectar ao servidor. Tente novamente mais tarde.');
     }
   }
 
@@ -57,9 +55,14 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void _handleError(http.Response response) {
     final responseData = json.decode(response.body);
-    setState(() {
-      _errorMessage = responseData['error'] ?? 'Falha no login. Verifique suas credenciais.';
-    });
+    _showErrorDialog(responseData['error'] ?? 'Falha no login. Verifique suas credenciais.');
+  }
+
+  void _showErrorDialog(String message) {
+    showCupertinoDialog(
+      context: context,
+      builder: (context) => ErrorDialog(message: message),
+    );
   }
 
   @override
@@ -142,22 +145,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     onPressed: _navigateToRegisterScreen,
                   ),
                 ),
-                SizedBox(height: 10),
-                if (_errorMessage.isNotEmpty) _buildErrorText(),
               ],
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  Widget _buildErrorText() {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Text(
-        _errorMessage,
-        style: const TextStyle(color: CupertinoColors.systemRed),
       ),
     );
   }
