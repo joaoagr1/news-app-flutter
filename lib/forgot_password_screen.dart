@@ -2,6 +2,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 
+import 'models/reset_password.screen.dart';
+
 class ForgotPasswordScreen extends StatefulWidget {
   @override
   _ForgotPasswordScreenState createState() => _ForgotPasswordScreenState();
@@ -17,9 +19,12 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
       final response = await http.post(url);
 
       if (response.statusCode == 200) {
-        setState(() {
-          _message = 'Email de recuperação enviado com sucesso.';
-        });
+        Navigator.push(
+          context,
+          CupertinoPageRoute(
+            builder: (context) => ResetPasswordScreen(email: _emailController.text.trim()),
+          ),
+        );
       } else {
         setState(() {
           _message = 'Erro ao enviar email de recuperação.';

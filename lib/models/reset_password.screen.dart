@@ -4,6 +4,10 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class ResetPasswordScreen extends StatefulWidget {
+  final String email;
+
+  ResetPasswordScreen({required this.email});
+
   @override
   _ResetPasswordScreenState createState() => _ResetPasswordScreenState();
 }
@@ -14,7 +18,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
   String _message = '';
 
   Future<void> resetPassword() async {
-    final url = Uri.parse('http://localhost:8585/auth/reset-password');
+    final url = Uri.parse('http://192.168.0.24:8585/auth/reset-password');
     try {
       final response = await http.post(
         url,
@@ -52,6 +56,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Text('Email: ${widget.email}'),
             CupertinoTextField(
               controller: _tokenController,
               placeholder: "Token",

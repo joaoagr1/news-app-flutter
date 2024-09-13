@@ -3,10 +3,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'forgot_password_screen.dart';
 import 'models/user.dart';
 import 'register_screen.dart';
 import 'result_screen.dart';
-import 'forgot_password_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
