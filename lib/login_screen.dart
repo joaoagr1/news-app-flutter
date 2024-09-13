@@ -91,7 +91,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   padding: EdgeInsets.all(16),
                 ),
                 Container(
-                  height: 40,
+                  height: 50,
                   alignment: Alignment.centerRight,
                   child: CupertinoButton(
                     child: Text("Recuperar Senha"),
