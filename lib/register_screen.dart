@@ -34,7 +34,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       );
 
       if (response.statusCode == 200) {
-        _showSuccessDialog('Cadastro realizado com sucesso. Um email de confirmação foi enviado.');
+        _showSuccessDialog('Registration successful. A confirmation email has been sent');
       } else {
         final responseData = json.decode(response.body);
         _showErrorDialog(responseData['error'] ?? 'Falha no cadastro. Verifique as informações.');
