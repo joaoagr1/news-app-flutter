@@ -11,7 +11,7 @@ class SuccessDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return CupertinoAlertDialog(
       title: Text(
-        'Sucesso',
+        'Success',
         style: TextStyle(color: CupertinoColors.activeGreen),
       ),
       content: Text(message),

@@ -10,7 +10,7 @@ class ErrorDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return CupertinoAlertDialog(
       title: Text(
-        'Erro',
+        'Error',
         style: TextStyle(color: CupertinoColors.systemRed),
       ),
       content: Text(message),
