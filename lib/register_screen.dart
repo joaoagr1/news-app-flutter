@@ -81,7 +81,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 CupertinoTextField(
                   controller: _loginController,
                   keyboardType: TextInputType.text,
-                  placeholder: "Login",
+                  placeholder: "Username",
                   padding: EdgeInsets.all(16),
                 ),
                 SizedBox(height: 10),
@@ -89,14 +89,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   controller: _passwordController,
                   keyboardType: TextInputType.text,
                   obscureText: true,
-                  placeholder: "Senha",
+                  placeholder: "Password",
                   padding: EdgeInsets.all(16),
                 ),
                 SizedBox(height: 10),
                 CupertinoTextField(
                   controller: _documentController,
                   keyboardType: TextInputType.text,
-                  placeholder: "Documento",
+                  placeholder: "Document",
                   padding: EdgeInsets.all(16),
                 ),
                 SizedBox(height: 10),
@@ -110,7 +110,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 CupertinoButton.filled(
                   child: Center(
                     child: Text(
-                      "Cadastrar",
+                      "Register",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: CupertinoColors.white,

@@ -82,7 +82,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 CupertinoTextField(
                   controller: _loginController,
                   keyboardType: TextInputType.emailAddress,
-                  placeholder: "E-mail",
+                  placeholder: "E-mail or Username",
                   padding: EdgeInsets.all(16),
                 ),
                 SizedBox(height: 10),
@@ -90,14 +90,14 @@ class _LoginScreenState extends State<LoginScreen> {
                   controller: _passwordController,
                   keyboardType: TextInputType.text,
                   obscureText: true,
-                  placeholder: "Senha",
+                  placeholder: "Password",
                   padding: EdgeInsets.all(16),
                 ),
                 Container(
-                  height: 50,
+                  height: 55,
                   alignment: Alignment.centerRight,
                   child: CupertinoButton(
-                    child: Text("Recuperar Senha"),
+                    child: Text("Forgot password?"),
                     onPressed: () {
                       Navigator.push(
                         context,
@@ -115,7 +115,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: CupertinoButton.filled(
                     child: Center(
                       child: Text(
-                        "Login",
+                        "Sign in",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: CupertinoColors.white,
@@ -134,7 +134,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     color: CupertinoColors.systemGrey,
                     child: Center(
                       child: Text(
-                        "Cadastre-se",
+                        "Sign up",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: CupertinoColors.black,

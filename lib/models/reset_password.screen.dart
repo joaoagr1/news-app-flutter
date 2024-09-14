@@ -31,16 +31,16 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
 
       if (response.statusCode == 200) {
         setState(() {
-          _message = 'Senha alterada com sucesso.';
+          _message = 'Password changed successfully';
         });
       } else {
         setState(() {
-          _message = 'Erro ao alterar a senha.';
+          _message = 'Error changing the password.';
         });
       }
     } catch (e) {
       setState(() {
-        _message = 'Erro ao conectar ao servidor. Tente novamente mais tarde.';
+        _message = 'Error connecting to the server. Please try again later.';
       });
     }
   }
@@ -49,14 +49,13 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
-        middle: Text('Redefinir Senha'),
+        middle: Text('Reset password'),
       ),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('Email: ${widget.email}'),
             CupertinoTextField(
               controller: _tokenController,
               placeholder: "Token",
@@ -65,7 +64,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
             SizedBox(height: 10),
             CupertinoTextField(
               controller: _newPasswordController,
-              placeholder: "Nova Senha",
+              placeholder: "New Password",
               obscureText: true,
               padding: EdgeInsets.all(16),
             ),

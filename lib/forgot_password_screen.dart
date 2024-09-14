@@ -56,7 +56,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
             ),
             SizedBox(height: 20),
             CupertinoButton.filled(
-              child: Text("Enviar Email de Recuperação"),
+              child: Text("Send password recovery email"),
               onPressed: sendResetEmail,
             ),
             SizedBox(height: 20),
