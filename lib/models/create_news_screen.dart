@@ -1,14 +1,18 @@
 // lib/create_news_screen.dart
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:newsapp/models/succes_dialog.dart';
+import 'package:newsapp/models/user.dart';
 import 'dart:convert';
-
+import '../result_screen.dart';
 import 'category.dart';
 
 class CreateNewsScreen extends StatefulWidget {
   final String token;
+  final User user;
 
-  CreateNewsScreen({required this.token});
+  CreateNewsScreen({required this.token, required this.user});
 
   @override
   _CreateNewsScreenState createState() => _CreateNewsScreenState();
@@ -59,8 +63,21 @@ class _CreateNewsScreenState extends State<CreateNewsScreen> {
       }),
     );
 
-    if (response.statusCode == 201) {
-      Navigator.pop(context);
+    if (response.statusCode == 200) {
+      showCupertinoDialog(
+        context: context,
+        builder: (context) => SuccessDialog(
+          message: 'News created successfully',
+          onOkPressed: () {
+            Navigator.of(context).pop(); // Close the dialog
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(
+                builder: (context) => ResultScreen(token: widget.token, user: widget.user),
+              ),
+            );
+          },
+        ),
+      );
     } else {
       // Handle error
     }
@@ -73,40 +90,40 @@ class _CreateNewsScreenState extends State<CreateNewsScreen> {
       body: _isLoading
           ? Center(child: CircularProgressIndicator())
           : Padding(
-              padding: EdgeInsets.all(16.0),
-              child: Column(
-                children: [
-                  TextField(
-                    controller: _titleController,
-                    decoration: InputDecoration(labelText: 'Title'),
-                  ),
-                  TextField(
-                    controller: _contentController,
-                    decoration: InputDecoration(labelText: 'Content'),
-                  ),
-                  DropdownButton<Category>(
-                    hint: Text('Select Category'),
-                    value: _selectedCategory,
-                    onChanged: (Category? newValue) {
-                      setState(() {
-                        _selectedCategory = newValue;
-                      });
-                    },
-                    items: _categories.map((Category category) {
-                      return DropdownMenuItem<Category>(
-                        value: category,
-                        child: Text(category.nome),
-                      );
-                    }).toList(),
-                  ),
-                  SizedBox(height: 20),
-                  ElevatedButton(
-                    onPressed: _createNews,
-                    child: Text('Create News'),
-                  ),
-                ],
-              ),
+        padding: EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            TextField(
+              controller: _titleController,
+              decoration: InputDecoration(labelText: 'Title'),
             ),
+            TextField(
+              controller: _contentController,
+              decoration: InputDecoration(labelText: 'Content'),
+            ),
+            DropdownButton<Category>(
+              hint: Text('Select Category'),
+              value: _selectedCategory,
+              onChanged: (Category? newValue) {
+                setState(() {
+                  _selectedCategory = newValue;
+                });
+              },
+              items: _categories.map((Category category) {
+                return DropdownMenuItem<Category>(
+                  value: category,
+                  child: Text(category.nome),
+                );
+              }).toList(),
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: _createNews,
+              child: Text('Create News'),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

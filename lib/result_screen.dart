@@ -123,7 +123,7 @@ class _ResultScreenState extends State<ResultScreen> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => CreateNewsScreen(token: widget.token),
+              builder: (context) => CreateNewsScreen(token: widget.token, user: widget.user),
             ),
           );
         },
