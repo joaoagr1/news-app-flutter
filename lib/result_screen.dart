@@ -1,13 +1,13 @@
 // lib/result_screen.dart
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:newsapp/user_dialog.dart';
 import 'dart:convert';
 import 'category_screen.dart';
 import 'models/create_news_screen.dart';
 import 'models/news.dart';
 import 'models/user.dart';
 import 'news_card.dart';
+import 'user_dialog.dart';
 import 'news_detail.dart';
 
 class ResultScreen extends StatefulWidget {
@@ -67,7 +67,17 @@ class _ResultScreenState extends State<ResultScreen> {
         itemCount: _newsList.length,
         itemBuilder: (context, index) {
           final news = _newsList[index];
-          return NewsCard(news: news);
+          return GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => NewsDetailScreen(news: news),
+                ),
+              );
+            },
+            child: NewsCard(news: news),
+          );
         },
       ),
       bottomNavigationBar: BottomNavigationBar(
