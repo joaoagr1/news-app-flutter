@@ -1,7 +1,7 @@
 // lib/forgot_password_screen.dart
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
-
+import 'error_dialog.dart';
 import 'models/reset_password.screen.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
@@ -11,7 +11,6 @@ class ForgotPasswordScreen extends StatefulWidget {
 
 class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   final _emailController = TextEditingController();
-  String _message = '';
 
   Future<void> sendResetEmail() async {
     final url = Uri.parse('http://192.168.0.24:8585/auth/forgot-password?email=${_emailController.text.trim()}');
@@ -26,14 +25,20 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
           ),
         );
       } else {
-        setState(() {
-          _message = 'Erro ao enviar email de recuperação.';
-        });
+        showCupertinoDialog(
+          context: context,
+          builder: (context) => ErrorDialog(
+            message: 'Erro ao enviar email de recuperação.',
+          ),
+        );
       }
     } catch (e) {
-      setState(() {
-        _message = 'Erro ao conectar ao servidor. Tente novamente mais tarde.';
-      });
+      showCupertinoDialog(
+        context: context,
+        builder: (context) => ErrorDialog(
+          message: 'Erro ao conectar ao servidor. Tente novamente mais tarde.',
+        ),
+      );
     }
   }
 
@@ -59,12 +64,6 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
               child: Text("Send password recovery email"),
               onPressed: sendResetEmail,
             ),
-            SizedBox(height: 20),
-            if (_message.isNotEmpty)
-              Text(
-                _message,
-                style: TextStyle(color: CupertinoColors.systemRed),
-              ),
           ],
         ),
       ),

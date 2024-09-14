@@ -3,6 +3,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'package:newsapp/models/succes_dialog.dart';
+
+import '../error_dialog.dart';
+
+
 class ResetPasswordScreen extends StatefulWidget {
   final String email;
 
@@ -15,7 +20,6 @@ class ResetPasswordScreen extends StatefulWidget {
 class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
   final _tokenController = TextEditingController();
   final _newPasswordController = TextEditingController();
-  String _message = '';
 
   Future<void> resetPassword() async {
     final url = Uri.parse('http://192.168.0.24:8585/auth/reset-password');
@@ -30,18 +34,32 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
       );
 
       if (response.statusCode == 200) {
-        setState(() {
-          _message = 'Password changed successfully';
-        });
+        showCupertinoDialog(
+          context: context,
+          builder: (context) => SuccessDialog(
+            message: 'Password changed successfully',
+            onOkPressed: () {
+              Navigator.of(context).pop(); // Close the dialog
+              Navigator.of(context).pop(); // Navigate back to login screen
+            },
+          ),
+        );
       } else {
-        setState(() {
-          _message = 'Error changing the password.';
-        });
+        final responseData = json.decode(response.body);
+        showCupertinoDialog(
+          context: context,
+          builder: (context) => ErrorDialog(
+            message: responseData['error'] ?? 'Error changing the password.',
+          ),
+        );
       }
     } catch (e) {
-      setState(() {
-        _message = 'Error connecting to the server. Please try again later.';
-      });
+      showCupertinoDialog(
+        context: context,
+        builder: (context) => ErrorDialog(
+          message: 'Error connecting to the server. Please try again later.',
+        ),
+      );
     }
   }
 
@@ -73,12 +91,6 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
               child: Text("Redefinir Senha"),
               onPressed: resetPassword,
             ),
-            SizedBox(height: 20),
-            if (_message.isNotEmpty)
-              Text(
-                _message,
-                style: TextStyle(color: CupertinoColors.systemRed),
-              ),
           ],
         ),
       ),
