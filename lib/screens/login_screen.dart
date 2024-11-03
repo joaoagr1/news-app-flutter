@@ -9,6 +9,8 @@ import 'register_screen.dart';
 import 'result_screen.dart';
 
 class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
+
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
@@ -67,36 +69,36 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
-      navigationBar: CupertinoNavigationBar(
+      navigationBar: const CupertinoNavigationBar(
         middle: Text('Login'),
       ),
       child: Stack(
         children: [
           Container(color: CupertinoColors.systemBackground),
           Container(
-            padding: EdgeInsets.only(top: 60, left: 40, right: 40),
+            padding: const EdgeInsets.only(top: 60, left: 40, right: 40),
             child: ListView(
               children: <Widget>[
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 CupertinoTextField(
                   controller: _loginController,
                   keyboardType: TextInputType.emailAddress,
                   placeholder: "E-mail or Username",
-                  padding: EdgeInsets.all(16),
+                  padding: const EdgeInsets.all(16),
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 CupertinoTextField(
                   controller: _passwordController,
                   keyboardType: TextInputType.text,
                   obscureText: true,
                   placeholder: "Password",
-                  padding: EdgeInsets.all(16),
+                  padding: const EdgeInsets.all(16),
                 ),
                 Container(
                   height: 55,
                   alignment: Alignment.centerRight,
                   child: CupertinoButton(
-                    child: Text("Forgot password?"),
+                    child: const Text("Forgot password?"),
                     onPressed: () {
                       Navigator.push(
                         context,
@@ -107,11 +109,12 @@ class _LoginScreenState extends State<LoginScreen> {
                     },
                   ),
                 ),
-                SizedBox(height: 40),
+                const SizedBox(height: 40),
                 Container(
                   height: 60,
                   alignment: Alignment.centerLeft,
                   child: CupertinoButton.filled(
+                    onPressed: login,
                     child: Center(
                       child: Text(
                         "Sign in",
@@ -122,15 +125,15 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                     ),
-                    onPressed: login,
                   ),
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 Container(
                   height: 60,
                   alignment: Alignment.centerLeft,
                   child: CupertinoButton(
                     color: CupertinoColors.systemGrey,
+                    onPressed: _navigateToRegisterScreen,
                     child: Center(
                       child: Text(
                         "Sign up",
@@ -141,7 +144,6 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                     ),
-                    onPressed: _navigateToRegisterScreen,
                   ),
                 ),
               ],

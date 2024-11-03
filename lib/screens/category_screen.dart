@@ -5,6 +5,8 @@ import 'category_news_screen.dart';
 import '../models/category.dart';
 
 class CategoryScreen extends StatefulWidget {
+  const CategoryScreen({super.key});
+
   @override
   _CategoryScreenState createState() => _CategoryScreenState();
 }
@@ -40,23 +42,23 @@ class _CategoryScreenState extends State<CategoryScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Categories'),
+        title: const Text('Categories'),
       ),
       body: _isLoading
-          ? Center(child: CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator())
           : ListView.builder(
         itemCount: _categories.length,
         itemBuilder: (context, index) {
           final category = _categories[index];
           return Card(
-            margin: EdgeInsets.all(10),
+            margin: const EdgeInsets.all(10),
             elevation: 5,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(15),
             ),
             child: ListTile(
-              title: Text(category.nome, style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
-              subtitle: Text(category.description, style: TextStyle(fontSize: 16)),
+              title: Text(category.nome, style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+              subtitle: Text(category.description, style: const TextStyle(fontSize: 16)),
               onTap: () {
                 Navigator.push(
                   context,

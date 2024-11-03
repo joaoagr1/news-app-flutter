@@ -5,12 +5,12 @@ import '../../../models/user.dart';
 class UserDataDialog extends StatelessWidget {
   final User user;
 
-  UserDataDialog({required this.user});
+  const UserDataDialog({super.key, required this.user});
 
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text('User Data', style: TextStyle(fontWeight: FontWeight.bold)),
+      title: const Text('User Data', style: TextStyle(fontWeight: FontWeight.bold)),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -26,7 +26,7 @@ class UserDataDialog extends StatelessWidget {
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(context),
-          child: Text('OK'),
+          child: const Text('OK'),
         ),
       ],
     );
@@ -40,9 +40,9 @@ class UserDataDialog extends StatelessWidget {
         children: [
           Text(
             label,
-            style: TextStyle(fontWeight: FontWeight.bold),
+            style: const TextStyle(fontWeight: FontWeight.bold),
           ),
-          SizedBox(width: 8),
+          const SizedBox(width: 8),
           Expanded(
             child: Text(
               value,

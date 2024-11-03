@@ -11,7 +11,7 @@ class CreateNewsScreen extends StatefulWidget {
   final String token;
   final User user;
 
-  CreateNewsScreen({required this.token, required this.user});
+  const CreateNewsScreen({super.key, required this.token, required this.user});
 
   @override
   _CreateNewsScreenState createState() => _CreateNewsScreenState();
@@ -85,23 +85,23 @@ class _CreateNewsScreenState extends State<CreateNewsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Create News')),
+      appBar: AppBar(title: const Text('Create News')),
       body: _isLoading
-          ? Center(child: CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator())
           : Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
             TextField(
               controller: _titleController,
-              decoration: InputDecoration(labelText: 'Title'),
+              decoration: const InputDecoration(labelText: 'Title'),
             ),
             TextField(
               controller: _contentController,
-              decoration: InputDecoration(labelText: 'Content'),
+              decoration: const InputDecoration(labelText: 'Content'),
             ),
             DropdownButton<Category>(
-              hint: Text('Select Category'),
+              hint: const Text('Select Category'),
               value: _selectedCategory,
               onChanged: (Category? newValue) {
                 setState(() {
@@ -115,10 +115,10 @@ class _CreateNewsScreenState extends State<CreateNewsScreen> {
                 );
               }).toList(),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: _createNews,
-              child: Text('Create News'),
+              child: const Text('Create News'),
             ),
           ],
         ),

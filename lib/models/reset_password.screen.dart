@@ -10,7 +10,7 @@ import '../components/dialog/error_dialog.dart';
 class ResetPasswordScreen extends StatefulWidget {
   final String email;
 
-  ResetPasswordScreen({required this.email});
+  const ResetPasswordScreen({super.key, required this.email});
 
   @override
   _ResetPasswordScreenState createState() => _ResetPasswordScreenState();
@@ -65,7 +65,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
-      navigationBar: CupertinoNavigationBar(
+      navigationBar: const CupertinoNavigationBar(
         middle: Text('Reset password'),
       ),
       child: Padding(
@@ -76,19 +76,19 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
             CupertinoTextField(
               controller: _tokenController,
               placeholder: "Token",
-              padding: EdgeInsets.all(16),
+              padding: const EdgeInsets.all(16),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             CupertinoTextField(
               controller: _newPasswordController,
               placeholder: "New Password",
               obscureText: true,
-              padding: EdgeInsets.all(16),
+              padding: const EdgeInsets.all(16),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             CupertinoButton.filled(
-              child: Text("Redefinir Senha"),
               onPressed: resetPassword,
+              child: Text("Redefinir Senha"),
             ),
           ],
         ),

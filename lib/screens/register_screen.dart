@@ -7,6 +7,8 @@ import '../models/succes_dialog.dart';
 
 
 class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({super.key});
+
   @override
   _RegisterScreenState createState() => _RegisterScreenState();
 }
@@ -66,47 +68,48 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
-      navigationBar: CupertinoNavigationBar(
+      navigationBar: const CupertinoNavigationBar(
         middle: Text('Register'),
       ),
       child: Stack(
         children: [
           Container(color: CupertinoColors.systemBackground),
           Container(
-            padding: EdgeInsets.only(top: 60, left: 40, right: 40),
+            padding: const EdgeInsets.only(top: 60, left: 40, right: 40),
             child: ListView(
               children: <Widget>[
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 CupertinoTextField(
                   controller: _loginController,
                   keyboardType: TextInputType.text,
                   placeholder: "Username",
-                  padding: EdgeInsets.all(16),
+                  padding: const EdgeInsets.all(16),
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 CupertinoTextField(
                   controller: _passwordController,
                   keyboardType: TextInputType.text,
                   obscureText: true,
                   placeholder: "Password",
-                  padding: EdgeInsets.all(16),
+                  padding: const EdgeInsets.all(16),
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 CupertinoTextField(
                   controller: _documentController,
                   keyboardType: TextInputType.text,
                   placeholder: "Document",
-                  padding: EdgeInsets.all(16),
+                  padding: const EdgeInsets.all(16),
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 CupertinoTextField(
                   controller: _emailController,
                   keyboardType: TextInputType.emailAddress,
                   placeholder: "Email",
-                  padding: EdgeInsets.all(16),
+                  padding: const EdgeInsets.all(16),
                 ),
-                SizedBox(height: 40),
+                const SizedBox(height: 40),
                 CupertinoButton.filled(
+                  onPressed: register,
                   child: Center(
                     child: Text(
                       "Register",
@@ -117,7 +120,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                     ),
                   ),
-                  onPressed: register,
                 ),
               ],
             ),

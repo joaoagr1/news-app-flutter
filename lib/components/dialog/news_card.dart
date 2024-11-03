@@ -6,12 +6,12 @@ import '../../models/news.dart';
 class NewsCard extends StatelessWidget {
   final News news;
 
-  NewsCard({required this.news});
+  const NewsCard({super.key, required this.news});
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.all(10),
+      margin: const EdgeInsets.all(10),
       elevation: 5,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15),
@@ -23,23 +23,23 @@ class NewsCard extends StatelessWidget {
           children: [
             Text(
               news.titulo,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Text(
               news.categoria.nome,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 18,
                 color: Colors.grey,
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Text(
               news.conteudo,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 16,
               ),
             ),

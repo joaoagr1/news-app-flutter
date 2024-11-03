@@ -7,7 +7,7 @@ import '../components/dialog/news_card.dart';
 class CategoryNewsScreen extends StatefulWidget {
   final int categoryId;
 
-  CategoryNewsScreen({required this.categoryId});
+  const CategoryNewsScreen({super.key, required this.categoryId});
 
   @override
   _CategoryNewsScreenState createState() => _CategoryNewsScreenState();
@@ -44,10 +44,10 @@ class _CategoryNewsScreenState extends State<CategoryNewsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('News by Category'),
+        title: const Text('News by Category'),
       ),
       body: _isLoading
-          ? Center(child: CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator())
           : ListView.builder(
         itemCount: _newsList.length,
         itemBuilder: (context, index) {

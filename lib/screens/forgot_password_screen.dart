@@ -4,6 +4,8 @@ import '../components/dialog/error_dialog.dart';
 import '../models/reset_password.screen.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
+  const ForgotPasswordScreen({super.key});
+
   @override
   _ForgotPasswordScreenState createState() => _ForgotPasswordScreenState();
 }
@@ -44,7 +46,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
-      navigationBar: CupertinoNavigationBar(
+      navigationBar: const CupertinoNavigationBar(
         middle: Text('Recover Password'),
       ),
       child: Padding(
@@ -56,12 +58,12 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
               controller: _emailController,
               keyboardType: TextInputType.emailAddress,
               placeholder: "E-mail",
-              padding: EdgeInsets.all(16),
+              padding: const EdgeInsets.all(16),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             CupertinoButton.filled(
-              child: Text("Send password recovery email"),
               onPressed: sendResetEmail,
+              child: Text("Send password recovery email"),
             ),
           ],
         ),

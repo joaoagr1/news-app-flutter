@@ -13,7 +13,7 @@ class ResultScreen extends StatefulWidget {
   final String token;
   final User user;
 
-  ResultScreen({required this.token, required this.user});
+  const ResultScreen({super.key, required this.token, required this.user});
 
   @override
   _ResultScreenState createState() => _ResultScreenState();
@@ -50,10 +50,10 @@ class _ResultScreenState extends State<ResultScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('News'),
+        title: const Text('News'),
         actions: [
           IconButton(
-            icon: Icon(Icons.notifications),
+            icon: const Icon(Icons.notifications),
             onPressed: () {
               // Handle notifications
             },
@@ -61,7 +61,7 @@ class _ResultScreenState extends State<ResultScreen> {
         ],
       ),
       body: _isLoading
-          ? Center(child: CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator())
           : ListView.builder(
         itemCount: _newsList.length,
         itemBuilder: (context, index) {
@@ -80,7 +80,7 @@ class _ResultScreenState extends State<ResultScreen> {
         },
       ),
       bottomNavigationBar: BottomNavigationBar(
-        items: [
+        items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
             label: 'User Data',
@@ -126,7 +126,7 @@ class _ResultScreenState extends State<ResultScreen> {
             ),
           );
         },
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       )
           : null,
     );
