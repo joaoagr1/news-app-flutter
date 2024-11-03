@@ -1,4 +1,3 @@
-// lib/widgets/success_dialog.dart
 import 'package:flutter/cupertino.dart';
 
 class SuccessDialog extends StatelessWidget {

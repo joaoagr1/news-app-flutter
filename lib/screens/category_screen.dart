@@ -1,9 +1,8 @@
-// lib/category_screen.dart
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'category_news_screen.dart';
-import 'models/category.dart';
+import '../models/category.dart';
 
 class CategoryScreen extends StatefulWidget {
   @override

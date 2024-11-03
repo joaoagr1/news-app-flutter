@@ -1,4 +1,3 @@
-// lib/models/category.dart
 class Category {
   final int id;
   final String nome;

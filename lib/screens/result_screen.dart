@@ -1,14 +1,13 @@
-// lib/result_screen.dart
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'category_screen.dart';
-import 'models/create_news_screen.dart';
-import 'models/news.dart';
-import 'models/user.dart';
-import 'news_card.dart';
-import 'user_dialog.dart';
-import 'news_detail.dart';
+import '../models/create_news_screen.dart';
+import '../models/news.dart';
+import '../models/user.dart';
+import '../components/dialog/news_card.dart';
+import '../components/dialog/user_dialog.dart';
+import 'news_detail_screen.dart';
 
 class ResultScreen extends StatefulWidget {
   final String token;

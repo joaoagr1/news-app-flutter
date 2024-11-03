@@ -1,10 +1,9 @@
-// lib/register_screen.dart
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-import 'error_dialog.dart';
-import 'models/succes_dialog.dart';
+import '../components/dialog/error_dialog.dart';
+import '../models/succes_dialog.dart';
 
 
 class RegisterScreen extends StatefulWidget {

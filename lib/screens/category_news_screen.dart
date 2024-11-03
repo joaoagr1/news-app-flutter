@@ -1,9 +1,8 @@
-// lib/category_news_screen.dart
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'models/news.dart';
-import 'news_card.dart';
+import '../models/news.dart';
+import '../components/dialog/news_card.dart';
 
 class CategoryNewsScreen extends StatefulWidget {
   final int categoryId;

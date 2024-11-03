@@ -1,4 +1,3 @@
-// lib/widgets/error_dialog.dart
 import 'package:flutter/cupertino.dart';
 
 class ErrorDialog extends StatelessWidget {

@@ -1,8 +1,7 @@
-// lib/forgot_password_screen.dart
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
-import 'error_dialog.dart';
-import 'models/reset_password.screen.dart';
+import '../components/dialog/error_dialog.dart';
+import '../models/reset_password.screen.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   @override

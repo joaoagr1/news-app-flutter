@@ -1,11 +1,10 @@
-// lib/reset_password_screen.dart
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import 'package:newsapp/models/succes_dialog.dart';
 
-import '../error_dialog.dart';
+import '../components/dialog/error_dialog.dart';
 
 
 class ResetPasswordScreen extends StatefulWidget {

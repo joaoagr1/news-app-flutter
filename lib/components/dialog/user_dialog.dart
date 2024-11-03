@@ -1,7 +1,6 @@
-// lib/widgets/user_data_dialog.dart
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../models/user.dart';
+import '../../../models/user.dart';
 
 class UserDataDialog extends StatelessWidget {
   final User user;

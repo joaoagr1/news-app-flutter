@@ -1,11 +1,10 @@
-// lib/create_news_screen.dart
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:newsapp/models/succes_dialog.dart';
 import 'package:newsapp/models/user.dart';
 import 'dart:convert';
-import '../result_screen.dart';
+import '../screens/result_screen.dart';
 import 'category.dart';
 
 class CreateNewsScreen extends StatefulWidget {

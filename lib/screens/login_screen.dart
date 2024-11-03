@@ -1,11 +1,10 @@
-// lib/login_screen.dart
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-import 'error_dialog.dart';
+import '../components/dialog/error_dialog.dart';
 import 'forgot_password_screen.dart';
-import 'models/user.dart';
+import '../models/user.dart';
 import 'register_screen.dart';
 import 'result_screen.dart';
 

@@ -1,4 +1,3 @@
-// lib/models/news.dart
 class News {
   final int id;
   final String titulo;

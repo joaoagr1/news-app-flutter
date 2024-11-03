@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'models/news.dart';
+import '../../models/news.dart';
 
 class NewsCard extends StatelessWidget {
   final News news;

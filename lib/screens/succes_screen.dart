@@ -1,4 +1,3 @@
-// lib/success_screen.dart
 import 'package:flutter/material.dart';
 
 class SuccessScreen extends StatelessWidget {
