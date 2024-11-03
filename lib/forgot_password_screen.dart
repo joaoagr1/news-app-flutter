@@ -46,7 +46,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
-        middle: Text('Recuperar Senha'),
+        middle: Text('Recover Password'),
       ),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
