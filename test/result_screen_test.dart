@@ -103,8 +103,12 @@ void main() {
         createdAt: '2024-01-01',
       );
 
+      final responseJson = jsonEncode([
+        {'id': 1, 'title': 'Notícia 1', 'content': 'Conteúdo da Notícia 1'}
+      ]);
       when(mockClient.get(any as Uri)).thenAnswer((_) async => http.Response(responseJson, 200));
-      when(mockClient.get(any as Uri)).thenAnswer((_) async => http.Response('Erro', 404)); await _buildResultScreen(tester, user);
+      when(mockClient.get(any as Uri)).thenAnswer((_) async => http.Response('Erro', 404)); 
+      await _buildResultScreen(tester, user);
       await tester.pumpAndSettle();
 
       expect(find.byType(NewsCard), findsNothing);
